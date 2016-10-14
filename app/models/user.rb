@@ -13,7 +13,13 @@ class User < ActiveRecord::Base
   #     where("friendships.status = ?", 'accepted')
   #   end
   # end
+  has_many :requested_friends, -> { where(friendships: {status: 'requested'}) },
+           through: :friendships, source: :friend
+
+  has_many :pending_friends, -> { where(friendships: {status: 'pending'}) },
+           through: :friendships, source: :friend
   has_many :posts
+  has_many :likes
   has_many :comments
 
   def self.from_omniauth(auth)
