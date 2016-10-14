@@ -2,10 +2,10 @@
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to 'My Profile', current_user, class: "navbar-brand" %>
+        <%# <%= link_to 'My Profile', current_user, class: "navbar-brand" %1> %>
       </div>
       <ul class="nav navbar-nav">
-        <% if user_signed_in? %>
+        <%# <% if user_signed_in? %1> %>
           <%# <li class="<%= 'active' if current_page?(friendships_path) %1>"><%= link_to "My Friends", friendships_path %1></li> %>
           <%# <li class="<%= 'active' if current_page?(feed_path) %1>"><%= link_to "FakeBook Feed", feed_path %1></li> %>
           <%# <li class="<%= 'active' if current_page?(users_path) %1>"><%= link_to "FakeBook Users", users_path %1></li> %>
@@ -18,7 +18,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <%= render 'friendships/requested_friends' %>
+              <%# <%= render 'friendships/requested_friends' %1> %>
             </ul>
           </li>
           <li><%= link_to 'Log out', destroy_user_session_path, method: 'delete' %></li>
