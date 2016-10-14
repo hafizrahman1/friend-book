@@ -6,6 +6,8 @@ gem 'devise'
 gem 'omniauth'
 # Omniauth with provider facebook
 gem 'omniauth-facebook'
+# Use Faker for genrating seed data
+gem 'faker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
