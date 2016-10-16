@@ -3,7 +3,7 @@
 <% end %>
 <h6><%= time_ago_in_words(post.created_at) %> ago</h6>
 <% if current_user == post.user %>
-  <h6><%= link_to 'Delete Post', post_path(post, post.id), method: :delete %></h6>
+  <h6><%= link_to 'Delete Post', post_path(post), method: :delete %></h6>
 <% end %>
 
 <div class="post-description">
