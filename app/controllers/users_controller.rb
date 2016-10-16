@@ -3,4 +3,8 @@ class UsersController < ApplicationController
     @users = User.all.order(:id)
     @post = current_user.posts.build
   end
+
+  def show
+    @posts = current_user.posts.build
+  end
 end
