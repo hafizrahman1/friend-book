@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <%# <%= image_tag user.gravatar_url default: "retro" %1> %>
+    <%= link_to user.name, user_path(user) %>
+  </td>
+  <td><%= pluralize(user.friends.count, "Friend") %></td>
+  <td class="text-center">
+    <div id="friend-form">
+      <%# <%= render partial: 'friendships/friendships_status', locals: {user: user} %1> %>
+    </div>
+  </td>
+</tr>

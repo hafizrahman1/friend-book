@@ -1,1 +1,14 @@
 <h1>Welcome to the FriendBook!</h1>
+<h2><%= current_user.name %> | <%= current_user.email %></h2>
+<table class="table user-list">
+    <thead>
+       <tr>
+         <th><span>User</span></th>
+         <th><span>Friends</span></th>
+         <th class="text-center"><span>Status</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @users || "There is no friends to show" %>
+    </tbody>
+</table>
