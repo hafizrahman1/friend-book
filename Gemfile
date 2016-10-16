@@ -8,6 +8,9 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 # Use Faker for genrating seed data
 gem 'faker'
+gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
+gem 'mini_magick'
+gem 'fog'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
