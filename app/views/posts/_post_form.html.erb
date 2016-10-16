@@ -1,6 +1,6 @@
 <%= form_for @post do |f| %>
   <div class="text">
-    <%= f.text_area :content, placeholder: "What's on your mind #{current_user.name}?" %>
+    <%= f.text_area :content, placeholder: "What's on your mind #{current_user.name}?", required: true %>
   </div>
-  <%= f.submit, class: "btn btn-primary" %>
+  <%= f.submit %>
 <% end %>

@@ -1,0 +1,21 @@
+<% unless current_page?(user_path(post.user)) %>
+  <strong><%= link_to post.user.name, user_path(post.user) %> made a post</strong>
+<% end %>
+<h6><%= time_ago_in_words(post.created_at) %> ago</h6>
+<% if current_user == post.user %>
+  <h6><%= link_to 'Delete Post', post_path(post, post.id), method: :delete %></h6>
+<% end %>
+
+<div class="post-description">
+  <p><%= post.content %></p>
+</div>
+
+<div class="post-footer">
+  <div class="input-group">
+    <%= form_for ([post, Comment.new]) do |f| %>
+      <%= f.text_area :content, placeholder: 'Add a comment', class: 'form-control' %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.submit "Post Commment", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
