@@ -2,5 +2,8 @@
   <div class="text">
     <%= f.text_area :content, placeholder: "What's on your mind #{current_user.name}?", required: true %>
   </div>
-  <%= f.submit %>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+  <span class="picture">
+    <%= f.file_field :photo, accept: 'image/jpeg,image/gif,image/png' %>
+  </span>
 <% end %>
