@@ -6,5 +6,6 @@ class UsersController < ApplicationController
 
   def show
     @posts = current_user.posts.build
+    @user = User.find_by_id(params[:id])
   end
 end
