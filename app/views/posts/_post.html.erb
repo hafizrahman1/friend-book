@@ -8,6 +8,7 @@
 
 <div class="post-description">
   <p><%= post.content %></p>
+  <%= image_tag post.photo.url if post.photo? %>
 </div>
 
 <div class="post-footer">
@@ -15,7 +16,11 @@
     <%= form_for ([post, Comment.new]) do |f| %>
       <%= f.text_area :content, placeholder: 'Add a comment', class: 'form-control' %>
       <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :post_id, value: post.id %>
       <%= f.submit "Post Comment", class: "btn btn-primary" %>
     <% end %>
   </div>
+  <ul class="comment-list">
+    <%= render partial: 'comments/comment', locals: {post: post} %>
+  </ul>
 </div>
