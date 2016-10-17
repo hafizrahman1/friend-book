@@ -1,26 +1,32 @@
-<% unless current_page?(user_path(post.user)) %>
-  <strong><%= link_to post.user.name, user_path(post.user) %> made a post</strong>
-<% end %>
-<h6><%= time_ago_in_words(post.created_at) %> ago</h6>
-<% if current_user == post.user %>
-  <h6><%= link_to 'Delete Post', post_path(post), method: :delete %></h6>
-<% end %>
+<div class="container">
+  <div class="col-sm-8">
+    <div class="panel panel-white post panel-shadow">
+      <% unless current_page?(user_path(post.user)) %>
+         <strong><%= link_to post.user.name, user_path(post.user) %> made a post</strong>
+      <% end %>
+      <h6 class="text-muted time"><%= time_ago_in_words(post.created_at) %> ago</h6>
+      <% if current_user == post.user %>
+         <h6><%= link_to 'Delete Post', post_path(post), method: :delete %></h6>
+      <% end %>
 
-<div class="post-description">
-  <p><%= post.content %></p>
-  <%= image_tag post.photo.url if post.photo? %>
-</div>
+    <div class="post-description">
+      <p><%= post.content %></p>
+      <%= image_tag post.photo.url if post.photo? %>
+    </div>
 
-<div class="post-footer">
-  <div class="input-group">
-    <%= form_for ([post, Comment.new]) do |f| %>
-      <%= f.text_area :content, placeholder: 'Add a comment', class: 'form-control' %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.hidden_field :post_id, value: post.id %>
-      <%= f.submit "Post Comment", class: "btn btn-primary" %>
-    <% end %>
+    <div class="post-footer">
+      <div class="input-group">
+        <%= form_for ([post, Comment.new]) do |f| %>
+          <%= f.text_area :content, placeholder: 'Add a comment', class: 'form-control' %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :post_id, value: post.id %>
+          <%= f.submit "Post Comment", class: "btn btn-primary" %>
+        <% end %>
+       </div>
+        <ul class="comment-list">
+          <%= render partial: 'comments/comment', locals: {post: post} %>
+        </ul>
+      </div>
+    </div>
   </div>
-  <ul class="comment-list">
-    <%= render partial: 'comments/comment', locals: {post: post} %>
-  </ul>
 </div>
