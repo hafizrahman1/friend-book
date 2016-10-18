@@ -1,0 +1,26 @@
+<table class="table user-list">
+    <thead>
+       <tr>
+         <th><span>Friend</span></th>
+         <th><span>Last Active</span></th>
+         <th class="text-center"><span>Status</span></th>
+      </tr>
+    </thead>
+      <tbody>
+        <% @friends.each do |friend| %>
+        <tr>
+          <td>
+            <%= image_tag friend.gravatar_url default: "identicon" %>
+            <%= link_to friend.name, user_path(friend) %>
+          </td>
+          <td>active <%= time_ago_in_words(friend.last_sign_in_at) %> ago</td>
+          <td class="text-center">
+            <div id="friend-form">
+              <%= render partial: 'friendships/friendships_status', locals: {user: friend}  %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+

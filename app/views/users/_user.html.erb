@@ -6,7 +6,7 @@
   <td><%= pluralize(user.friends.count, "Friend") %></td>
   <td class="text-center">
     <div id="friend-form">
-      <%# <%= render partial: 'friendships/friendships_status', locals: {user: user} %1> %>
+      <%= render partial: 'friendships/friendships_status', locals: {user: user} %>
     </div>
   </td>
 </tr>

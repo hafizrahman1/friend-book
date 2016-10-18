@@ -5,7 +5,7 @@
       </div>
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-          <%# <li class="<%= 'active' if current_page?(friendships_path) %1>"><%= link_to "My Friends", friendships_path %1></li> %>
+          <li class="<%= 'active' if current_page?(friendships_path) %>"><%= link_to "My Friends", friendships_path %></li>
           <%# <li class="<%= 'active' if current_page?(feed_path) %1>"><%= link_to "FakeBook Feed", feed_path %1></li> %>
           <li class="<%= 'active' if current_page?(users_path) %>"><%= link_to "FriendBook Users", users_path %></li>
         <% end %>
