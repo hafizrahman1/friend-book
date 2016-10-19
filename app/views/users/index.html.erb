@@ -1,6 +1,9 @@
 <h1>Welcome to the FriendBook!</h1>
 <h2><%= current_user.name %> | <%= current_user.email %></h2><br>
+<!-- render the post_form -->
 <%= render 'posts/post_form' %><br><br>
+
+<!--create table for the user list -->
 <table class="table user-list">
     <thead>
        <tr>
@@ -10,6 +13,7 @@
       </tr>
     </thead>
     <tbody>
+      <!--render the user list using user partial-->
       <%= render @users || "There are no friends!" %>
     </tbody>
 </table>
