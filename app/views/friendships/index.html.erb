@@ -10,7 +10,7 @@
         <% @friends.each do |friend| %>
         <tr>
           <td>
-            <%= image_tag friend.gravatar_url default: "identicon" %>
+            <%= image_tag(friend.gravatar_url default: "identicon", size: "60x60") %>
             <%= link_to friend.name, user_path(friend) %>
           </td>
           <td> last active <%= time_ago_in_words(friend.last_sign_in_at) %> ago</td>
