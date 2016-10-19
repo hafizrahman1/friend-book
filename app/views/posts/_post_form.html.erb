@@ -1,7 +1,7 @@
 <%= form_for @post, html: { multipart: true } do |f| %>
   <div class="text">
     <%= f.text_area :content, placeholder: "What's on your mind #{current_user.name}?", size: "50X12", required: true %>
-  </div>
+  </div><br>
   
   <div class="field">
     <span>Tags:</span>
@@ -9,14 +9,14 @@
     <%= f.fields_for(:tag_attributes) do |tag_form| %>
       New Tag: <%= tag_form.text_field :name, label: :name %><br>
     <% end %>
-  </div>
+  </div><br>
   
+  <span class="picture">
+    <%= f.file_field :photo, accept: 'image/jpeg,image/gif,image/png' %>
+  </span><br>
+
   <div class="actions">
     <%= f.submit "Post", class: "btn btn-primary" %>
   </div>
   
-  <span class="picture">
-    <%= f.file_field :photo, accept: 'image/jpeg,image/gif,image/png' %>
-  </span>
-
 <% end %>
