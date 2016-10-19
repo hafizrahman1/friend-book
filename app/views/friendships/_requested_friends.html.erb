@@ -1,0 +1,11 @@
+<% if friend_request? %>
+  <% current_user.requested_friends.each do |friend| %>
+    <li>
+    <strong><%= friend.name %></strong>
+    <%= link_to 'Accept', friendship_path(current_user, friend_id: friend.id), method: :put %>
+    <%= link_to 'Decline', friendship_path(current_user, friend_id:: friend.id), method: :delete %>
+    </li>
+  <% end %>
+<% else %>
+  <li>No Friend Requests. <strong><%= link_to 'Find Friends', users_path %></strong></li>
+<% end %>

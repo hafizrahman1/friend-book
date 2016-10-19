@@ -6,22 +6,13 @@ class Post < ActiveRecord::Base
   has_many :liking_users, through: :likes, source: :user
   has_many :post_tags
   has_many :tags, through: :post_tags
-  scope :all_posts, -> { (where(user: current_user) + where(user: current_user.friends))}
+  
+  scope :all_posts, ->(current_user) { (where(user: current_user) + where(user: current_user.friends)).sort_by(&:created_at).reverse}
   mount_uploader :photo, PhotoUploader
   
   validates_presence_of :content
   validate :photo_size
-  
-  def tag_ids=(tag_ids)
-    tags.clear
-    tag_ids.each do |tag_id|
-      if !tag_id.empty?
-        tag = Tag.find(tag_id)
-        tags << tag if !tags.include?(tag)
-      end
-    end
-  end
-
+ 
   def tag_attributes=(tag)
     if !tag[:name].empty?
       tag = Tag.find_or_create_by(name: tag[:name])
