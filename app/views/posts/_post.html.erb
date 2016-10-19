@@ -10,7 +10,10 @@
       <% end %>
 
     <div class="post-description">
-      <p><%= post.content %></p>
+      <strong><%= post.content %></strong>
+      <% post.tags.each do |tag| %>
+        <strong class="label label-info">#<%= tag.name %></strong>
+      <% end %><br><br>
       <%= image_tag post.photo.url if post.photo? %>
     </div>
 
