@@ -13,7 +13,7 @@
             <%= image_tag friend.gravatar_url default: "identicon" %>
             <%= link_to friend.name, user_path(friend) %>
           </td>
-          <td>active <%= time_ago_in_words(friend.last_sign_in_at) %> ago</td>
+          <td> last active <%= time_ago_in_words(friend.last_sign_in_at) %> ago</td>
           <td class="text-center">
             <div id="friend-form">
               <%= render partial: 'friendships/friendships_status', locals: {user: friend}  %>
