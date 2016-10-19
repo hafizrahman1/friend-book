@@ -9,7 +9,7 @@
       <strong><%= post.content %></strong>
       <% post.tags.each do |tag| %>
         <strong class="label label-info">#<%= tag.name %></strong>
-      <% end %><br><br>
+      <% end %><br>
       <%= image_tag(post.photo.url, size: "400x250", alt: "Picture") if post.photo? %>
     </div>
 
