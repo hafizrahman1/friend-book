@@ -3,8 +3,9 @@ class PostsController < ApplicationController
 
   def index
     @post = current_user.posts.build
-    @all_posts = (Post.where(user: current_user) + Post.where(user: current_user.friends)).sort_by(&:created_at)
-    @posts = @all_posts
+    # @all_posts = (Post.where(user: current_user) + Post.where(user: current_user.friends)).sort_by(&:created_at)
+    # @posts = @all_posts
+    @posts = Post.all_posts
   end
 
   def new
