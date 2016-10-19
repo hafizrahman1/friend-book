@@ -9,8 +9,8 @@
       <strong><%= post.content %></strong>
       <% post.tags.each do |tag| %>
         <strong class="label label-info">#<%= tag.name %></strong>
-      <% end %><br>
-      <%= image_tag post.photo.url if post.photo? %>
+      <% end %><br><br>
+      <%= image_tag(post.photo.url, size: "400x250", alt: "Picture") if post.photo? %>
     </div>
 
     <h6 class="text-muted time">Created <%= time_ago_in_words(post.created_at) %> ago</h6>
