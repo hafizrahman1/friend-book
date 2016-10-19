@@ -6,7 +6,7 @@
       <% end %>
       <h6 class="text-muted time"><%= time_ago_in_words(post.created_at) %> ago</h6>
       <% if current_user == post.user %>
-         <h6><%= link_to 'Delete Post', post_path(post), method: :delete %></h6>
+         <%= link_to 'Delete Post', post_path(post), method: :delete, class: "btn btn-danger" %>
       <% end %>
 
     <div class="post-description">
