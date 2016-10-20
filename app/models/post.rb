@@ -18,13 +18,17 @@ class Post < ActiveRecord::Base
       tag = Tag.find_or_create_by(name: tag[:name])
       tags << tag
     end
+
+    # if !tag[:name].empty?
+    #   self.tags.build(Tag.find_or_create_by(name: tag[:name]))
+    # end
   end
 
   private
 
   def photo_size
-    if photo.size > 5.megabytes
-      errors.add(:photo, "Image should be less than 5MB")
+    if photo.size > 3.megabytes
+      errors.add(:photo, "Image should be less than 3MB")
     end
   end
 end

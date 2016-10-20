@@ -3,8 +3,6 @@ class PostsController < ApplicationController
 
   def index
     @post = current_user.posts.build
-    # @all_posts = (Post.where(user: current_user) + Post.where(user: current_user.friends)).sort_by(&:created_at)
-    # @posts = @all_posts
     @posts = Post.all_posts(current_user)
   end
 
@@ -28,14 +26,17 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-
-    redirect_to :back
+    redirect_to :back, alert: "Post deleted successfully!"
   end
 
   private
 
   def set_post
-    @post = Post.find(params[:id])
+    if Post.exists?(params[:id])
+      @post = Post.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def post_params
