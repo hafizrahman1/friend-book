@@ -21,7 +21,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post)
     else
-      render :new
+      # render :new
+      redirect_to :back, alert: "Post content can not be blank!"
     end
   end
 

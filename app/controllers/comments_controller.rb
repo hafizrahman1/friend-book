@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_post, only: [:new, :create, :destroy]
   def new
-    @comment = @post.comments.build
+    @comment = @post.comments.new
   end
 
   def create
@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to :back, notice: "Comment successfully created"
     else
-      render action: :new
+      redirect_to :back, notice: "Comment cannot be blank"
     end
   end
 
