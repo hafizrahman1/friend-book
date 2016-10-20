@@ -1,9 +1,9 @@
-# friend-book
+# Friend-book
 Login with Facebook
 
 The app communicates with the Facebook API, allowing users to sign in using their Facebook account. This uses devise and the omniauth gem to ensure easy and secure authentication.
 
-# The overall concept:
+## The overall concept:
 The user need to sign in or sign up first to get access to Friend-book web app.
 As a guest you can sign in or sign up
 After logging in, you can post your thoughts.
@@ -15,7 +15,7 @@ User can see the post feed for theirs own posts and friends post.
 
 At its current state the project is an MVP, meeting all the requirements of the assessment.
 
-Requirements:
+## Requirements:
 
 1. Use RoR
 2. Models must include the following relationships
