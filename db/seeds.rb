@@ -11,7 +11,9 @@ Post.delete_all
 Comment.delete_all
 Like.delete_all
 Tag.delete_all
+
 TAGS = ["adventurous","amused", "angry", "bad", "beautiful", "better", "charming", "cheerful", "creepy", "cute", "dangerous", "delightful", "depressed", "elegant", "energetic", "enthusiastic", "fancy", "friendly", "funny", "glorious", "gorgeous", "grumpy", "handsome", "happy", "hilarious", "hilarious","successful", "super", "tired", "tough"]
+
 
 User.create!(
   name: "Hafiz",
@@ -31,7 +33,7 @@ User.create!(
   password: "password"
   )
 
-100.times do |n|
+50.times do |n|
   user = User.new(
     name: Faker::Name.name,
     email: Faker::Internet.email,

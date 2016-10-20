@@ -7,7 +7,7 @@ class FriendshipsController < ApplicationController
 
   def create
     Friendship.request(current_user, @friend)
-    flash[:notice] = "Friend request send"
+    flash[:notice] = "Friend request send to #{@friend.name}!"
     redirect_to :back 
   end
 
@@ -24,7 +24,7 @@ class FriendshipsController < ApplicationController
   def destroy
     if current_user.friends.include?(@friend)
       Friendship.breakup(current_user, @friend)
-      flash[:notice] = "Successfully unfriended #{@friend.name}"
+      flash[:notice] = "Successfully deleted #{@friend.name}"
     elsif current_user.requested_friends.include?(@friend)
       Friendship.breakup(current_user, @friend)
       flash[:notice] = "Friendship with #{@friend.name} declined"
