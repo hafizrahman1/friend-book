@@ -2,12 +2,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :destroy]
 
   def index
-    @post = current_user.posts.build
+    #current_user = User.find_by_id(params[:user_id])
     @posts = Post.all_posts(current_user)
   end
 
   def new
     @post = Post.new
+    @tags = @post.tags.build
   end
 
   def show
@@ -20,7 +21,7 @@ class PostsController < ApplicationController
       redirect_to post_path(@post)
     else
       # render :new
-      redirect_to :back, alert: "Post content can not be blank!"
+      redirect_to :back, alert: "#{@post.errors.messages}"
     end
   end
 
@@ -40,6 +41,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content, :photo, :tag_ids => [], :tag_attributes => [:name])
+    params.require(:post).permit(:content, :photo, :tag_ids => [], :tags_attributes => [:name])
   end
 end

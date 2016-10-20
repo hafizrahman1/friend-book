@@ -1,9 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
-  has_many :commenting_users, through: :comments, source: :user
-  has_many :likes, dependent: :destroy
-  has_many :liking_users, through: :likes, source: :user
   has_many :post_tags
   has_many :tags, through: :post_tags
   
@@ -12,17 +9,15 @@ class Post < ActiveRecord::Base
   
   validates_presence_of :content
   validate :photo_size
- 
-  def tag_attributes=(tag)
-    if !tag[:name].empty?
-      tag = Tag.find_or_create_by(name: tag[:name])
-      tags << tag
-    end
 
-    # if !tag[:name].empty?
-    #   self.tags.build(Tag.find_or_create_by(name: tag[:name]))
-    # end
+  def tags_attributes=(tags_attributes)
+    tags_attributes.values.each do |tag_attribute|
+      if tag_attribute[:name].present?
+        self.tags.build(tag_attribute)
+      end
+    end
   end
+ 
 
   private
 

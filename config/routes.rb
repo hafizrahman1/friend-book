@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
-  root 'users#index'
-  resources :users, except: [:edit, :update, :destroy]
+  root 'welcome#home'
+
+  resources :users, except: [:edit, :update, :destroy] do
+    resources :posts
+  end
+
   resources :posts do
     resources :comments
   end
