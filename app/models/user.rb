@@ -19,10 +19,10 @@ class User < ActiveRecord::Base
            through: :friendships, source: :friend
   
   has_many :posts, dependent: :destroy
-  has_many :likes, dependent: :destroy
-  has_many :liked_posts, through: :likes, source: :post
+  # has_many :likes, dependent: :destroy
+  # has_many :liked_posts, through: :likes, source: :post
   has_many :comments, dependent: :destroy
-  has_many :commented_posts, through: :comments, source: :post
+  # has_many :commented_posts, through: :comments, source: :post
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
