@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :destroy]
-  before_action :set_user, only: [:index, :new]
+  before_action :set_post, only: [:destroy]
+  before_action :set_user, only: [:new, :index]
 
   def index
     if @user
@@ -14,11 +14,20 @@ class PostsController < ApplicationController
     if @user == current_user
       @post = Post.new
     else
-      redirect_to root_path, alert: "Access denied!"
+      redirect_to user_path(current_user), alert: "Access denied!"
     end
   end
 
   def show
+    if params[:user_id]
+      @user = User.find_by(id: params[:user_id])
+      @post = @user.posts.find_by(id: params[:id])
+      if @post.nil?
+        redirect_to user_posts_path(@user), alert: "Post not found"
+      end
+    else
+      @post = Post.find(params[:id])
+    end
   end
 
   def create
