@@ -1,18 +1,21 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :destroy]
+  before_action :set_user, only: [:index, :new]
 
   def index
-    user = User.find_by_id(params[:user_id])
-    if user 
-      @posts = user.posts.order("created_at DESC")
+    if @user
+      @posts = @user.posts.order("created_at DESC")
     else
-      redirect_to root_path
+      redirect_to root_path, alert: "Users not found!"
     end
   end
 
   def new
-    @post = Post.new
-    @tags = @post.tags.build
+    if @user == current_user
+      @post = Post.new
+    else
+      redirect_to root_path, alert: "Access denied!"
+    end
   end
 
   def show
@@ -22,7 +25,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to post_path(@post)
+      redirect_to user_posts_path(current_user)
     else
       # render :new
       redirect_to :back, alert: "#{@post.errors.messages}"
@@ -31,7 +34,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to :back, alert: "Post deleted successfully!"
+    redirect_to user_posts_path(current_user), alert: "Post deleted successfully!"
   end
 
   def feed
@@ -39,6 +42,10 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
 
   def set_post
     @post = Post.find(params[:id])

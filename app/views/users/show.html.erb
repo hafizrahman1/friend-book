@@ -1,7 +1,7 @@
 <%= link_to :back do %>
   <i class="ion-android-arrow-back"></i> Back
 <% end %>
-<h2>Welcome back, <%= @user.name %> | <%= @user.email %></h2>
+
 <div class="container">
   <div class="row"
     <aside class="col-md-4"">
@@ -14,5 +14,12 @@
     </aside>  
   </div>
 </div>
+<h2>Welcome back, <%= @user.name %> | <%= @user.email %></h2><br>
 
-<%= link_to "View all posts", user_posts_path(@user), class: "btn btn-primary" %>
+<% if current_user == @user %>
+  <%= link_to "Create Post", new_user_post_path(@user), class: "btn btn-primary" %>
+  <%= link_to "My Posts", user_posts_path(@user), class: "btn btn-primary" %>
+  <%= link_to "My Friends", friendships_path, class: "btn btn-primary" %>
+<% else %>
+  <%= link_to "View Posts", user_posts_path(@user), class: "btn btn-primary" %>
+<% end %>
