@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+
+  resources :tags, only: [:index, :show]
+
   resources :friendships, only: [:index, :create, :update, :destroy]
   
   get "feed", to: "posts#feed"

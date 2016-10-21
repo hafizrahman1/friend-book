@@ -8,7 +8,7 @@
     <div class="post-description">
       <strong><%= post.content %></strong>
       <% post.tags.each do |tag| %>
-        <strong class="label label-info">#<%= tag.name %></strong>
+       <strong class="label label-info">#<%= link_to tag.name, tag_path(tag) %></strong> 
       <% end %>
       <br>
       <%= image_tag(post.photo.url, size: "400x250", alt: "Picture", padding: "15px") if post.photo? %>
