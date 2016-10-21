@@ -19,7 +19,7 @@
       <% if current_user == post.user %>
         <%= link_to 'Delete Post', user_post_path(post.user, post), method: :delete, class: "btn btn-danger btn-xs" %>
       <% end %><br><br>
-
+  <% unless current_page?(user_posts_path(post.user)) or current_page?(feed_path)%>
     <div class="post-footer">
       <div class="input-group">
         <%= form_for ([post, Comment.new]) do |f| %>
@@ -28,12 +28,13 @@
           <%= f.hidden_field :post_id, value: post.id %>
           <%= f.submit "Post Comment", class: "btn btn-primary" %>
         <% end %>
-
        </div>
         <ul class="comment-list">
           <%= render partial: 'comments/comment', locals: {post: post} %>
         </ul>
       </div>
+      <% end %>
     </div>
   </div>
+
 </div>
