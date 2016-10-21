@@ -16,7 +16,7 @@
     <h6 class="text-muted time">Created <%= time_ago_in_words(post.created_at) %> ago</h6>
       <%= link_to "Show Post", user_post_path(post.user, post), class: "btn btn-primary btn-xs"  %>
       <% if current_user == post.user %>
-        <%= link_to 'Delete Post', post_path(post), method: :delete, class: "btn btn-danger btn-xs" %>
+        <%= link_to 'Delete Post', user_post_path(post.user, post), method: :delete, class: "btn btn-danger btn-xs" %>
       <% end %><br><br>
 
     <div class="post-footer">

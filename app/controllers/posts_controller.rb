@@ -2,8 +2,12 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :destroy]
 
   def index
-    #current_user = User.find_by_id(params[:user_id])
-    @posts = Post.all_posts(current_user)
+    user = User.find_by_id(params[:user_id])
+    if user 
+      @posts = user.posts.order("created_at DESC")
+    else
+      redirect_to root_path
+    end
   end
 
   def new
@@ -30,14 +34,14 @@ class PostsController < ApplicationController
     redirect_to :back, alert: "Post deleted successfully!"
   end
 
+  def feed
+    @posts = Post.all_posts(current_user)
+  end
+
   private
 
   def set_post
-    if Post.exists?(params[:id])
-      @post = Post.find(params[:id])
-    else
-      redirect_to root_path
-    end
+    @post = Post.find(params[:id])
   end
 
   def post_params
