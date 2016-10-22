@@ -3,8 +3,11 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :post_tags
   has_many :tags, through: :post_tags
+  # scope :user_posts, ->(current_user) { where(user: current_user) }
+  # scope :friend_posts, ->(current_user) { where(user: current_user.friends)}
+
+  scope :all_posts, -> (current_user) {(where(user: current_user).union(user: current_user.friends)).order(created_at: :desc)}
   
-  scope :all_posts, ->(current_user) { (where(user: current_user) + where(user: current_user.friends)).sort_by(&:created_at).reverse}
   mount_uploader :photo, PhotoUploader
   
   validates_presence_of :content
