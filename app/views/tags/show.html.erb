@@ -1,4 +1,6 @@
-<strong><%= @tag.name  %></strong>
+<strong class="label label-info"><%= @tag.name  %></strong>
+<ul>
 <% @posts.each do |post| %>
-	<strong><%= post.content %></strong>
+  <li><strong> <%= link_to post.content, user_post_path(post.user, post) %></strong></li>
 <% end %>
+ </ul>
