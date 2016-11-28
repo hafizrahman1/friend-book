@@ -3,6 +3,8 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :post_tags
   has_many :tags, through: :post_tags
+
+  default_scope -> { order(created_at: :desc) }
   # scope :user_posts, ->(current_user) { where(user: current_user) }
   # scope :friend_posts, ->(current_user) { where(user: current_user.friends)}
 

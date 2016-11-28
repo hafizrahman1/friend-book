@@ -4,7 +4,11 @@ class PostsController < ApplicationController
 
   def index
     if @user
-      @posts = @user.posts.order("created_at DESC")
+      @posts = @user.posts
+      respond_to do |format|
+        format.html { render :index }
+        format.json { render :posts, adapter: :json }
+      end
     else
       redirect_to root_path, alert: "Users not found!"
     end
