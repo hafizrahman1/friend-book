@@ -53,3 +53,28 @@ users = User.order(:created_at)
 end
 
 TAGS.each{|tag| Tag.create(:name  => tag)}
+
+# Friendships
+users = User.all
+pending = users[0..10]
+requested = users[11..40]
+accepted = users[15..30]
+final_requested = users[41..49]
+
+pending.each do |n|
+  requested.each do |i|
+    Friendship.request(n, i)
+  end
+end
+
+accepted.each do |n|
+  pending.each do |i|
+    Friendship.accept(n, i)
+  end
+end
+
+final_requested.each do |n|
+  pending.each do |i|
+    Friendship.request(n, i)
+  end
+end
