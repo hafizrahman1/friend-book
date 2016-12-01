@@ -1,4 +1,24 @@
-<h1>Welcome to the FriendBook!</h1>
-<h2><%= current_user.name %> | <%= current_user.email %></h2><br>
-<!-- render the post_form -->
-<%= render 'posts/post_form' %><br><br>
+<%# <h2><%= current_user.name %1> | <%= current_user.email %1></h2><br> %>
+<div class="info-container">
+    <div class="sidebar">
+      <div class="sidebar-container">
+        <div class="sm-profile">
+          <%= link_to image_tag(current_user.gravatar_url default: "identicon", size: "60x60"), user_path(current_user) %>
+          <%= link_to current_user.name, user_path(current_user) %>
+        </div>
+        <div class="info">
+          <%# <%= link_to "Edit profile", "#" %1> %>
+        </div>
+      </div>
+    </div> 
+    <div class="content">
+        <div class="post-form shrink">
+          <%= render 'posts/post_form' %>
+        </div>
+        <h3>Newsfeed:</h3>
+      
+        <div class="posts-container" id="posts">
+
+        </div>
+    </div>
+</div>

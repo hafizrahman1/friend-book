@@ -1,22 +1,24 @@
-<%= form_for @post, html: { multipart: true } do |f| %>
-  <div class="text">
-    <%= f.text_area :content, placeholder: "What's on your mind #{current_user.name}?", size: "50X12" %>
-  </div><br>
   
+<%= form_for @post, html: { multipart: true } do |f| %>
+  <div class="post-label">
+    <%= f.label "Update status" %>
+  </div>
+  <div class="text" id="text-area">
+    <%= f.text_area :content, placeholder: "What's on your mind #{current_user.name}?", size: "66X12" %>
+  </div>
+ <div class="form-expand" id="form-expand" >
+   
   <div class="field">
     <span>Tags:</span>
-  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br><br>
+    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
     <%= f.fields_for :tags, @post.tags.build do |tag_form| %>
       New Tag: <%= tag_form.text_field :name %><br>
     <% end %>
-  </div><br>
-  
-  <span class="picture">
-    <%= f.file_field :photo, accept: 'image/jpeg,image/gif,image/png' %>
-  </span><br>
+  </div>
 
-  <div class="actions">
+  <%= f.file_field :photo, accept: 'image/jpeg,image/gif,image/png' %>
+  <div class="post-submit">
     <%= f.submit "Create Post", class: "btn btn-primary" %>
   </div>
-  
+</div>
 <% end %>

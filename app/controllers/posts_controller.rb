@@ -51,10 +51,11 @@ class PostsController < ApplicationController
   end
 
   def feed
-    # @posts = Post.all_posts(current_user)
-    # @posts = Post.user_posts(current_user).merge(Post.friend_posts(current_user))
-    # byebug
     @posts = Post.all_posts(current_user)
+    respond_to do |format|
+      format.html { render :feed }
+      format.json { render json: @posts, adapter: :json }
+    end
   end
 
   private
