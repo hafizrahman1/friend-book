@@ -35,21 +35,35 @@ function Post(id, photo, content, created_at, user, comments, tags) {
 Post.prototype.renderHtml = function() {
   var html = "";
   html += "<div class='panel panel-default'" + " id='posts-" + this.id + "'>"; 
-  html += "<div class='panel-heading'>" + "<img src=" + Gravtastic(this.user.email, {default: 'identicon', size: 40 }) + "> " + this.user.name +" says: " + "<strong>" + this.content + "</strong><br>" + this.formatTime();
+  html += "<div class='panel-heading'>" + "<img src=" + Gravtastic(this.user.email, {default: 'identicon', size: 40 }) + "> " + this.user.name +" " + "<strong>" + this.content + "</strong>" +" " + this.displayTags() + "<br>" + this.formatTime();
   if (this.photo.url !== null) {
     html += "<br><img src=" + this.photo.url + " height='212' width='463' " + ">" + "</div>";
   } else {
     html += "</div>";
   }
-  html += "<div class='panel-body'>" + "created at" + "<p>" + this.formatTime() + " by " + this.user.name + "</p>" + "</div></div>";
+  html += "<div class='panel-body'>" +"<details><summary>Comments</summary><p>" + this.displayComments() + "</p></details></div></div>";
 
   return html;
 
 }
 Post.prototype.displayComments = function() {
+  var html = "";
+  if (this.comments.length !== 0) {
+    this.comments.forEach(function(comment) {
+      html += "<img src=" + Gravtastic(comment.user.email, {default: 'identicon', size: 40 }) + "> " + comment.user.name + " " + "<strong>" + comment.content + "</strong><br><br>"
+    });
+    return html;
+  }
+  return html;
 }
 
 Post.prototype.displayTags = function(){
+  var html= "";
+  var link = "/tags/";
+  this.tags.forEach(function(tag) {
+   html += "<strong class='label label-danger'>#" + tag.name + "</strong>" + " ";
+  });
+  return html;
 }
 
 Post.prototype.formatTime = function() {
@@ -58,7 +72,6 @@ Post.prototype.formatTime = function() {
     year: "numeric", month: "long",
     day: "numeric", hour: "2-digit", minute: "2-digit"
   };
-//document.write(date.toLocaleDateString("en-US"));
   return date.toLocaleTimeString("en-us", options);
 }
 
