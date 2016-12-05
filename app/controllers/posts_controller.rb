@@ -38,7 +38,11 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to user_posts_path(current_user)
+      render json: @post, adapter: :json
+      # respond_to do |format|
+      #   format.html { redirect_to user_posts_path(current_user) }
+      #   format.json { render json: @post, adapter: :json }
+      # end
     else
       # render :new
       redirect_to :back, alert: "#{@post.errors.messages}"
@@ -47,7 +51,8 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to user_posts_path(current_user), alert: "Post deleted successfully!"
+    # redirect_to user_posts_path(current_user), alert: "Post deleted successfully!"
+    render json: @post, adapter: :json, alert: "Post deleted successfully!"
   end
 
   def feed

@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require gravtastic
+//= require moment
 //= require_tree .

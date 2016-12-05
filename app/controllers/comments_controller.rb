@@ -8,7 +8,8 @@ class CommentsController < ApplicationController
     @comment = @post.comments.create(comment_params)
 
     if @comment.save
-      redirect_to :back, notice: "Comment successfully created"
+      # redirect_to :back, notice: "Comment successfully created"
+      render json: @comment, adapter: :json
     else
       redirect_to :back, notice: "Comment cannot be blank"
     end
@@ -17,7 +18,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-    redirect_to :back
+    render json: @comment, adapter: :json
   end
 
   private
