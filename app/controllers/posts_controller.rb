@@ -24,13 +24,17 @@ class PostsController < ApplicationController
 
   def show
     if params[:user_id]
-      @user = User.find_by(id: params[:user_id])
-      @post = @user.posts.find_by(id: params[:id])
-      if @post.nil?
-        redirect_to user_posts_path(@user), alert: "Post not found"
-      end
-    else
+      # @user = User.find_by(id: params[:user_id])
+      # @post = @user.posts.find_by(id: params[:id])
+      # if @post.nil?
+      #   redirect_to user_posts_path(@user), alert: "Post not found"
+      # end
+    # else
       @post = Post.find(params[:id])
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @post, adapter: :json }
+      end
     end
   end
 

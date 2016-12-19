@@ -1,1 +1,25 @@
-<%= render @post %>
+<div class="info-container">
+    <div class="sidebar">
+      <div class="sidebar-container">
+        <div class="sm-profile">
+          <%= link_to image_tag(current_user.gravatar_url default: "identicon", size: "60x60"), user_path(current_user) %>
+          <%= link_to current_user.name, user_path(current_user) %>
+        </div>
+        <div class="info">
+          <%# <%= link_to "Edit profile", "#" %1> %>
+          <%# <%= image_tag("close.png", title: "Delete Post") %1> %>
+        </div>
+      </div>
+    </div> 
+    <div class="content">
+      <h3>Post Show Page:</h3><br>
+
+      <a href="#" class="js-prev" data-id="<%= @post.id %>"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> Previous</button></a>
+      <a href="#" class="js-next" data-id="<%= @post.id %>"><button type="button" class="btn btn-default btn-sm">Next <span class="glyphicon glyphicon-arrow-right"></span></button></a><br><br>
+      
+        <div class="posts-container" id="posts">
+
+        </div>
+    </div>
+</div>
+

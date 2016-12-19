@@ -63,7 +63,7 @@ function Post(postObj) {
 Post.prototype.renderHtml = function() {
   var html = "";
   html += "<div class='panel panel-default'" + " id='posts-" + this.id + "'>"; 
-  html += "<div class='panel-heading'>" + this.deleteLink() + "<img src=" + Gravtastic(this.user.email, {default: 'identicon', size: 40 }) + "> " + this.user.name +" " + "<strong>" + this.content + "</strong>" +" " + this.displayTags() + "<br>" + this.formatTime();
+  html += "<div class='panel-heading'>" + this.deleteLink() + "<img src=" + Gravtastic(this.user.email, {default: 'identicon', size: 40 }) + "> " + this.user.name + " " + this.formatPost() + " " + this.displayTags() + "<br>" + this.formatTime();
   if (this.photo.url !== null) {
     html += "<br><img src=" + this.photo.url + " height='212' width='463' " + ">" + "</div>";
   } else {
@@ -71,6 +71,14 @@ Post.prototype.renderHtml = function() {
   }
   html += "<div class='panel-body'>" + `<details id="post-${this.id}"><summary>Comments</summary>` + this.displayComments() + "</details><br>" + this.commentForm() + "</div></div>";
 
+  return html;
+}
+
+// format the post content with the show page link
+Post.prototype.formatPost = function() {
+  var url = `users/${this.user.id}/posts/${this.id}`;
+  var html = "";
+  html += `<a href=${url}><strong>${this.content}</strong></a>`;
   return html;
 }
 
@@ -134,6 +142,9 @@ return html;
 // destroy the selected comment from a post
 function destroyComment(commentObj) {
   var url = $(commentObj).attr('href');
+  if (window.location.pathname !== '/') {
+    url = window.location.origin + '/' + $(commentObj).attr('href');
+  }
   $.ajax({
     url: url,
     method: 'DELETE',
@@ -148,6 +159,9 @@ function destroyComment(commentObj) {
 // destroy the post with associated comments
 function destroyPost(postObj) {
   var url = $(postObj).attr('href');
+  if (window.location.pathname !== '/') {
+    url = window.location.origin + '/' + $(postObj).attr('href');
+  }
   $.ajax({
    url: url,
    method: 'DELETE',
@@ -160,11 +174,18 @@ function destroyPost(postObj) {
   });
 }
 
-// create the comment at the back end and add the output in the DOM
+// create the comment and add the output in the DOM
 function createComment(formObj) {
   var formData = $(formObj).serialize();
+  var url;
+  if (window.location.pathname === '/') {
+    url = formObj.action;
+  } else {
+    var uriArr = formObj.action.split('/');
+    url = window.location.origin + '/posts/' + parseInt(uriArr[uriArr.length - 2]) + '/comments';
+  }
   $.ajax({
-    url: formObj.action,
+    url: url,
     type: 'POST',
     dataType: 'json',
     data: formData,
@@ -174,6 +195,7 @@ function createComment(formObj) {
     }
   });
 }
+
 // create the post and add it to the DOM
 function createPost(form) {
   var formData = new FormData(form);

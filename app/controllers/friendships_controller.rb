@@ -6,6 +6,7 @@ class FriendshipsController < ApplicationController
   end
 
   def create
+    byebug
     Friendship.request(current_user, @friend)
     flash[:notice] = "Friend request send to #{@friend.name}!"
     redirect_to :back 

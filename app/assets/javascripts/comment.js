@@ -1,3 +1,4 @@
+// comment object with ES6 constructor and methods
 class Comment {
   constructor(commentObj) {
     this.id = commentObj.id;
